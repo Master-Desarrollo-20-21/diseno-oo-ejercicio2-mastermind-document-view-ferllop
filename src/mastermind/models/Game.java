@@ -62,4 +62,12 @@ public class Game {
 	public void saveProposedCombination(ProposedCombination proposedCombination) {
 		player.saveProposedCombination(proposedCombination);
 	}
+	
+	public char[] getValidColorsLetters() {
+		char[] validColorInitials = new char[Color.values().length];
+		for (int i = 0; i < Color.values().length; i++) {
+			validColorInitials[i] = Color.values()[i].getLetter();
+		}
+		return validColorInitials;
+	}
 }

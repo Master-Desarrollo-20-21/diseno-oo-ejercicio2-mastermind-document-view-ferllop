@@ -4,14 +4,7 @@ public abstract class Combination {
 	
 	protected Color[] combination;
 		
-	public String toString(char symbol) {
-		StringBuffer result = new StringBuffer();
-		
-		for (int i = 0; i < combination.length; i++) {
-			result.append(symbol);
-		}		
-		return result.toString();
-	}
+	
 	
 	public int getSize() {
 		return combination.length;
