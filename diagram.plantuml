@@ -50,12 +50,20 @@ Enum Color {
     Purple
 }
 
+
 abstract class View {
     +{abstract}interact()
 }
 View <|-- GameView
 View <|-- PlayView
+View <|-- AttemptView
 View --> Game
+GameView ..> PlayView
+GameView ..> ResumeView
+GameView ..> EndView
+PlayView ..> AttemptView
+PlayView ..> CombinationView
+CombinationView ..> Combination
 
 class Console {
     +{static}getInstance()
@@ -65,7 +73,9 @@ class Console {
     +printProposalResult()
     +print()
 }
-GameView ..> Console
 PlayView ..> Console
-
+AttemptView ..> Console
+ResumeView ..> Console
+EndView ..> Console
+CombinationView ..> Console
 @enduml
