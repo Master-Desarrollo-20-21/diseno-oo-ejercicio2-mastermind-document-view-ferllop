@@ -1,0 +1,72 @@
+@startuml
+
+title Mastermind - Public interface class diagram
+
+class Mastermind {
+    +play()
+    +{static} main()
+}
+Mastermind *-- Game
+Mastermind *-- View
+
+class Game {
+    +initialize()
+    +getPlayer()
+    +getProposedCombinations()
+    +getSecretCombination()
+    +isFinished()
+    +playerWins()
+}
+Game *-- SecretCombination
+Game *-- Player
+
+class Combination{
+    +toString(): String
+    +contains(Color): Boolean
+}
+Combination *-- "4" Color
+Combination <|-- SecretCombination
+Combination <|-- ProposedCombination
+
+class ProposedCombination {
+    countBlacks()
+    countWhites()
+}
+
+class Player {
+    +saveProposedCombination()
+    +getLastProposedCombination()
+    +getProposedCombinationsQuantity()
+    +getProposedCombinations()
+}
+Player *-- "0..10"ProposedCombination
+
+Enum Color {
+    Red
+    Blue
+    Yellow
+    Green
+    Orange
+    Purple
+}
+
+
+abstract class View {
+    +{abstract}interact()
+}
+View <|-- GameView
+View <|-- PlayView
+View --> Game
+
+class Console {
+    +{static}getInstance()
+    +getValidValue()
+    +getLowerCaseString()
+    +printAttempts()
+    +printProposalResult()
+    +print()
+}
+GameView ..> Console
+PlayView ..> Console
+
+@enduml
