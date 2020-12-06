@@ -13,10 +13,6 @@ public class Player {
 	public void saveProposedCombination(ProposedCombination proposedCombination) {
 		proposedCombinations.add(proposedCombination);
 	}
-		
-	public int getProposedCombinationsQuantity() {
-		return proposedCombinations.size();
-	}
 	
 	public ProposedCombination getLastProposedCombination() {
 		return proposedCombinations.get(proposedCombinations.size()-1);

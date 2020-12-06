@@ -30,7 +30,7 @@ public class Game {
 	}
 	
 	private boolean totalAttemptsSurpassed(int allowedTotalAttempts) {
-		if (player.getProposedCombinationsQuantity() >= allowedTotalAttempts) {
+		if (this.getProposedCombinationsCount() >= allowedTotalAttempts) {
 			return true;
 		}		
 		return false;
@@ -50,17 +50,16 @@ public class Game {
 	public SecretCombination getSecretCombination() {
 		return secretCombination;
 	}
-
-	public Player getPlayer() {
-		return player;
-	}
 	
 	public ArrayList<ProposedCombination> getProposedCombinations() {
 		return player.getProposedCombinations();
 	}
 
-	public int getProposedCombinationsQuantity() {
-		return player.getProposedCombinationsQuantity();
+	public int getProposedCombinationsCount() {
+		return this.getProposedCombinations().size();
 	}	
 	
+	public void saveProposedCombination(ProposedCombination proposedCombination) {
+		player.saveProposedCombination(proposedCombination);
+	}
 }
