@@ -15,7 +15,7 @@ public class ProposedCombinationView {
 		String errorMessage = "";
 		do {
 			proposedCombination = ConsoleIO.getInstance().getString(title);
-			errorMessage = renderErrorMessage(proposedCombination);
+			errorMessage = this.renderErrorMessage(proposedCombination);
 			if (!errorMessage.isEmpty()) {
 				ConsoleIO.getInstance().print(errorMessage);
 			}
