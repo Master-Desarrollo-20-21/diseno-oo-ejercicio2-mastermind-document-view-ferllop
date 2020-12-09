@@ -5,19 +5,20 @@ import utils.ConsoleIO;
 
 public class GameView extends View {
 	
+	PlayView playView;
+	ResumeView resumeView;
+	
 	public GameView(Game game) {
-		super(game);		
+		super(game);
+		this.playView = new PlayView(game);
+		this.resumeView = new ResumeView();
 	}
 	
-	@Override
 	public void interact() {
-		PlayView playView = new PlayView(game);
-		ResumeView resumeView = new ResumeView();
 		do {	
 			this.game.initialize();
 			playView.interact();
-		} while (resumeView.interact());	
-		new EndView().interact();		
+		} while (resumeView.read(Message.PLAY_AGAIN.getMessage() + ": "));	
+		ConsoleIO.getInstance().print(Message.END.getMessage());	
 	}	
-
 }

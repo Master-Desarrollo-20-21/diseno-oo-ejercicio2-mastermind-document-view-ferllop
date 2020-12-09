@@ -6,68 +6,43 @@ public class Game {
 	
 	private Player player;	
 	private SecretCombination secretCombination;
-	int allowedTotalAttempts;
-	int combinationLength;
+	private final int ALLOWED_TOTAL_ATTEMPTS = 10;
+	public static final int COMBINATION_LENGTH = 4;
 	
-	public Game(int allowedTotalAttempts, int combinationLength) {
-		this.allowedTotalAttempts = allowedTotalAttempts;
-		this.combinationLength = combinationLength;
+	public Game() {
 		this.initialize();
 	}
 
 	public void initialize() {
-		this.secretCombination = new SecretCombination(combinationLength);
 		this.player = new Player();
+		this.secretCombination = new SecretCombination(COMBINATION_LENGTH);
 	}
 	
+	public void saveAttempt(ProposedCombination proposedCombination) {
+		player.saveAttempt(new Attempt(proposedCombination, secretCombination));
+	}	
+	
 	public boolean isFinished() {
-		return this.totalAttemptsSurpassed(allowedTotalAttempts) || 
-				this.playerWins();
+		return this.playerLoses() || this.playerWins();
 	}
 	
 	public boolean playerWins() {
-		return this.allBlacksInProposedCombination(this.getLastProposedCombination());
+		return this.player.getLastAttempt().getBlacks() == COMBINATION_LENGTH;
 	}
 	
-	private boolean totalAttemptsSurpassed(int allowedTotalAttempts) {
-		if (this.getProposedCombinationsCount() >= allowedTotalAttempts) {
-			return true;
-		}		
-		return false;
+	private boolean playerLoses() {
+		return this.player.getAttemptsCount() >= ALLOWED_TOTAL_ATTEMPTS;
 	}
 	
-	private boolean allBlacksInProposedCombination(ProposedCombination proposedCombination) {
-		if (proposedCombination.countBlacks(secretCombination) == secretCombination.getSize()) {
-			return true;
-		};		
-		return false;
-	}
-	
-	private ProposedCombination getLastProposedCombination() {
-		return player.getLastProposedCombination();
-	}	
-
-	public SecretCombination getSecretCombination() {
-		return secretCombination;
-	}
-	
-	public ArrayList<ProposedCombination> getProposedCombinations() {
-		return player.getProposedCombinations();
-	}
-
-	public int getProposedCombinationsCount() {
-		return this.getProposedCombinations().size();
+	public int getAttemptsCount() {
+		return this.player.getAttemptsCount();
 	}	
 	
-	public void saveProposedCombination(ProposedCombination proposedCombination) {
-		player.saveProposedCombination(proposedCombination);
+	public ArrayList<Attempt> getAttempts(){
+		return this.player.getAttempts();
 	}
 	
-	public char[] getValidColorsLetters() {
-		char[] validColorInitials = new char[Color.values().length];
-		for (int i = 0; i < Color.values().length; i++) {
-			validColorInitials[i] = Color.values()[i].getLetter();
-		}
-		return validColorInitials;
+	public Result getResult(ProposedCombination proposedCombination) {
+		return new Result(proposedCombination, secretCombination);
 	}
 }

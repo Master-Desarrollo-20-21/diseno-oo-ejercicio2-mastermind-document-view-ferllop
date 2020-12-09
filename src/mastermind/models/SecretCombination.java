@@ -1,34 +1,22 @@
 package mastermind.models;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class SecretCombination extends Combination {
-
 	public SecretCombination(int combinationLength) {
-		do {
-			Color[] combination = new Color[combinationLength];
-			for (int i = 0; i < combination.length; i++) {
-				int randomValue = new Random().nextInt(Color.values().length);
-				Color randomColor = Color.values()[randomValue];
-				combination[i] = randomColor;
-			}
-			this.combination = combination;
-		} while (this.hasDuplicates());
-	}
+		super(combinationLength);
+		for (int i = 0; i < this.getSize(); i++) {
+			this.setColor(i, this.getRandomColorAvoiding(this.getColors()));
+		}
+	}	
 	
-	private boolean hasDuplicates() { //COPIA PEGA DEL ALGORITMO DE CONSOLE ARJJJJ!!
-		String string = this.toString();
-		
-		for (int i = 0; i< string.length(); i++) {
-			for (int j = 0; j < string.length(); j++) {
-				if (j==i) {
-					continue;
-				}
-				if (string.toCharArray()[j] == string.toCharArray()[i]) {
-					return true;
-				}
-			}
-		}		
-		return false;
+	private Color getRandomColorAvoiding(Color[] colors) {
+		Color color;
+		do {
+			int randomIndex = new Random().nextInt(Color.values().length);
+			color = Color.values()[randomIndex];
+		} while (Arrays.asList(colors).contains(color));
+		return color;
 	}
 }

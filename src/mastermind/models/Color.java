@@ -1,6 +1,7 @@
 package mastermind.models;
 
 public enum Color {
+	
 	RED('r'),
 	BLUE('b'),
 	YELLOW('y'),
@@ -8,22 +9,44 @@ public enum Color {
 	ORANGE('o'),
 	PURPLE('p');
 	
-	private char letter;
+	private char initial;
 	
 	private Color(char initial) {
-		this.letter = initial;
+		this.initial = initial;
 	}
 	
-	public char getLetter() {
-		return letter;		
+	public char getInitial() {
+		return initial;		
 	}
 	
 	public static Color valueOf(char letter) {
         for (Color color : values()) {
-            if (color.letter == letter) {
+            if (color.initial == letter) {
                 return color;
             }
         }
         return null;
     }
+	
+	public static String getInitials(Color[] colors) {
+		String colorsInitials = "";
+		for (int i = 0; i < colors.length; i++) {
+			colorsInitials += colors[i].getInitial();
+		}
+		return colorsInitials;
+	}
+
+	public static String getInitials() {
+		return getInitials(Color.values());
+	}
+	
+	public static Color[] getColorsArray(String colorsInitials) {
+		Color[] colors = new Color[colorsInitials.length()];
+		char[] colorsInitialsChar = colorsInitials.toCharArray();
+		for (int i = 0; i < colors.length; i++) {
+			colors[i] = Color.valueOf(colorsInitialsChar[i]);
+		}
+		return colors;
+	}	
+	
 }
