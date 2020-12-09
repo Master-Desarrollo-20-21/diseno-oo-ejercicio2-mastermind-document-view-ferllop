@@ -32,7 +32,7 @@ public class AttemptView extends View {
 	}	
 	
 	public String renderAttempt(Attempt attempt) {
-		return proposedCombinationView.renderCombinationInitials(attempt.getProposedCombination()) + " --> " 
+		return this.proposedCombinationView.renderCombinationInitials(attempt.getProposedCombination()) + " --> " 
 				+ attempt.getBlacks() + " blacks and " 
 				+ attempt.getWhites() + " whites";
 	}
