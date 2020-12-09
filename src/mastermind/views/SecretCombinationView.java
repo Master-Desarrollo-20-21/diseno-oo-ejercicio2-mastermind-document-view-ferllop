@@ -5,7 +5,7 @@ import utils.ConsoleIO;
 
 public class SecretCombinationView {	
 	public void write() {
-		ConsoleIO.getInstance().print(renderHiddenSecretCombination());
+		ConsoleIO.getInstance().print(this.renderHiddenSecretCombination());
 	}
 	
 	private String renderHiddenSecretCombination() {
