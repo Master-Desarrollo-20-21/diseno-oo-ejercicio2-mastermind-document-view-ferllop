@@ -1,119 +1,121 @@
 @startuml
 
 title Mastermind - Public interface class diagram
-
 package mastermind{
 
     class Mastermind {
         +play()
         +{static} main()
     }
+}
     
-    package mastermind.models {
-        Mastermind *-- Game
-        
-        class Game {
-            +initialize()
-            +saveAttempt()
-            +getAttemptsCount()
-            +getAttempts()
-            +isFinished()
-            +playerWins()
-        }
-        Game *-- SecretCombination
-        Game *-- Player
-        
-        class Combination{
-            +contains(Color): Boolean
-            +getSize(): int
-            #setColor(int, Color)
-            +getColor(i): Color
-            +getColors(): Color[]
-        }
-        Combination *-- "4" Color
-        Combination <|-- SecretCombination
-        Combination <|-- ProposedCombination
-        
-        class Attempt {
-            +getProposedCombination()
-            +getBlacks()
-            +getWhites()
-        }
-        Attempt *-- ProposedCombination
-        Attempt *-- Result
-        
-        class Result {
-            getBlacks()
-            getWhites()
-        }
-        
-        class Player {
-            +saveAttempt()
-            +getLastAttempt(): Attempt
-            +getAttempt(int): Attempt
-            +getAttempts(): Attempt[]
-        }
-        Player *-- "0..10"Attempt
-        
-        Enum Color {
-            Red
-            Blue
-            Yellow
-            Green
-            Orange
-            Purple
-            +getInitial()
-            +{static}getInitials(Color[]): String
-            +{static}getInitials(): String
-            +{static}getColorsArray(String): Color[]
-        }
-        
-        class CombinationChecker{
-            +isValid()
-            +hasValidLength()
-            +hasValidColors()
-            +hasDuplicates()
-        }
+package mastermind.models {
+    Mastermind *-- Game
+    
+    class Game {
+        +initialize()
+        +saveAttempt()
+        +getAttemptsCount()
+        +getAttempts()
+        +isFinished()
+        +playerWins()
+    }
+    Game *-- SecretCombination
+    Game *-- Player
+    
+    class Combination{
+        +contains(Color): Boolean
+        +getSize(): int
+        #setColor(int, Color)
+        +getColor(i): Color
+        +getColors(): Color[]
+    }
+    Combination *-- "4" Color
+    Combination <|-- SecretCombination
+    Combination <|-- ProposedCombination
+    
+    class Attempt {
+        +getProposedCombination()
+        +getBlacks()
+        +getWhites()
+    }
+    Attempt *-- ProposedCombination
+    Attempt *-- Result
+    
+    class Result {
+        getBlacks()
+        getWhites()
     }
     
-    package mastermind.views {
-        Mastermind *-- GameView
-        
-        abstract class View {
-            +{abstract}interact()
-        }
-        View <|-- GameView
-        View <|-- PlayView
-        View <|-- AttemptView
-        
-        class GameView{}
-        GameView *-- PlayView
-        GameView *-- ResumeView
-        
-        class PlayView{}
-        PlayView *-- AttemptView
-        
-        class AttemptView{}
-        AttemptView *-- ProposedCombinationView
-        AttemptView *-- SecretCombinationView
-        
-        class ProposedCombinationView{}
-        ProposedCombinationView ..> CombinationChecker
-        
-        enum Message{}
-        Message <.. ProposedCombinationView
-        Message <.. View
-        
-        class Console {
-            +{static}getInstance()
-            +getString()
-            +printEmptyLine()
-            +print()
-        }
-        Console <.. View
-        Console <.. ProposedCombinationView
-        Console <.. SecretCombinationView
-        Console <.. ResumeView
+    class Player {
+        +saveAttempt()
+        +getLastAttempt(): Attempt
+        +getAttempt(int): Attempt
+        +getAttempts(): Attempt[]
+    }
+    Player *-- "0..10"Attempt
+    
+    Enum Color {
+        Red
+        Blue
+        Yellow
+        Green
+        Orange
+        Purple
+        +getInitial()
+        +{static}getInitials(Color[]): String
+        +{static}getInitials(): String
+        +{static}getColorsArray(String): Color[]
+    }
+    
+    class CombinationChecker{
+        +isValid()
+        +hasValidLength()
+        +hasValidColors()
+        +hasDuplicates()
     }
 }
+
+package mastermind.views {
+    Mastermind *-- GameView
+    
+    abstract class View {
+        +{abstract}interact()
+    }
+    View <|-- GameView
+    View <|-- PlayView
+    View <|-- AttemptView
+    
+    class GameView{}
+    GameView *-- PlayView
+    GameView *-- ResumeView
+    
+    class PlayView{}
+    PlayView *-- AttemptView
+    
+    class AttemptView{}
+    AttemptView *-- ProposedCombinationView
+    AttemptView *-- SecretCombinationView
+    
+    class ProposedCombinationView{}
+    ProposedCombinationView ..> CombinationChecker
+    
+    enum Message{}
+    Message <.. ProposedCombinationView
+    Message <.. View
+    
+    
+}
+
+package utils {
+    class Console {
+        +{static}getInstance()
+        +getString()
+        +printEmptyLine()
+        +print()
+    }
+    Console <.. View
+    Console <.. ProposedCombinationView
+    Console <.. SecretCombinationView
+    Console <.. ResumeView
 @enduml
