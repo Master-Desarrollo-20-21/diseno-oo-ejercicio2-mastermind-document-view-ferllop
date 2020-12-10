@@ -23,6 +23,6 @@ public enum Message {
 	}
 	
 	public String getFormattedMessage(String[] values) {
-		return String.format(this.message, (Object[]) values);
+		return String.format(this.getMessage(), (Object[]) values);
 	}
 }
