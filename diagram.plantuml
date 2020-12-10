@@ -32,7 +32,12 @@ package mastermind.models {
     }
     Combination *-- "4" Color
     Combination <|-- SecretCombination
+    
+    class ProposedCombination{
+        +{static}getChecker(String combination): MastermindCombinationChecker
+    }
     Combination <|-- ProposedCombination
+    ProposedCombination ..> MastermindCombinationChecker
     
     class Attempt {
         +getProposedCombination()
@@ -63,17 +68,18 @@ package mastermind.models {
         Orange
         Purple
         +getInitial()
+        +{static}valueOf(char letter): Color
         +{static}getInitials(Color[]): String
         +{static}getInitials(): String
         +{static}getColorsArray(String): Color[]
     }
     
-    class CombinationChecker{
+    class MastermindCombinationChecker{
         +isValid()
         +hasValidLength()
         +hasValidColors()
-        +hasDuplicates()
     }
+    
 }
 
 package mastermind.views {
@@ -97,10 +103,23 @@ package mastermind.views {
     AttemptView *-- ProposedCombinationView
     AttemptView *-- SecretCombinationView
     
-    class ProposedCombinationView{}
-    ProposedCombinationView ..> CombinationChecker
+    class ProposedCombinationView{
+        +read()
+    }
+    ProposedCombinationView ..> MastermindCombinationChecker
     
-    enum Message{}
+    class SecretCombinationView{
+        +write()
+    }
+    
+    class ResumeView{
+        +read()
+    }
+    
+    enum Message{
+        +getMessage()
+        +getFormattedMessage()
+    }
     Message <.. ProposedCombinationView
     Message <.. View
     
@@ -118,4 +137,11 @@ package utils {
     Console <.. ProposedCombinationView
     Console <.. SecretCombinationView
     Console <.. ResumeView
+    
+    class CombinationChecker {
+        +hasValidLength(int validLength)
+        +hasValidValues(T[] validValues)
+        +hasDuplicates()
+    }
+    CombinationChecker <|-- MastermindCombinationChecker
 @enduml
