@@ -27,7 +27,7 @@ public class Result {
 				whites++;
 			}
 		}
-		return whites - this.blacks;
+		return whites - this.getBlacks();
 	}
 	
 	public int getBlacks() {
