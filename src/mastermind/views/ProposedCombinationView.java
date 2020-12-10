@@ -27,7 +27,6 @@ public class ProposedCombinationView {
 	}
 	
 	private String renderErrorMessage(MastermindCombinationChecker combinationChecker) {
-		assert(combinationChecker != null);
 		String errorMessage = "";
 		if(!combinationChecker.hasValidLength()) {
 			errorMessage += Message.NO_VALID_LENGTH.getMessage() + "\n";
