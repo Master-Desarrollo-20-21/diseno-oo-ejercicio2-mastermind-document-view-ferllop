@@ -7,11 +7,7 @@ public class Game {
 	private Player player;	
 	private SecretCombination secretCombination;
 	private final int ALLOWED_TOTAL_ATTEMPTS = 10;
-	public static final int COMBINATION_LENGTH = 4;
-	
-	public Game() {
-		this.initialize();
-	}
+	public static final int COMBINATION_LENGTH = 4;	
 
 	public void initialize() {
 		this.player = new Player();
@@ -31,18 +27,14 @@ public class Game {
 	}
 	
 	private boolean playerLoses() {
-		return this.player.getAttemptsCount() >= ALLOWED_TOTAL_ATTEMPTS;
+		return this.getAttemptsCount() >= ALLOWED_TOTAL_ATTEMPTS;
 	}
 	
 	public int getAttemptsCount() {
-		return this.player.getAttemptsCount();
+		return this.player.getAttempts().size();
 	}	
 	
 	public ArrayList<Attempt> getAttempts(){
 		return this.player.getAttempts();
-	}
-	
-	public Result getResult(ProposedCombination proposedCombination) {
-		return new Result(proposedCombination, secretCombination);
 	}
 }

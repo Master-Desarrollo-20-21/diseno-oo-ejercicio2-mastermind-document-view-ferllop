@@ -10,5 +10,5 @@ public abstract class View {
 		this.game = game;
 	}
 	
-	public abstract void interact();
+	protected abstract void interact();
 }

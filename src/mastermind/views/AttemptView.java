@@ -18,7 +18,9 @@ public class AttemptView extends View {
 	
 	@Override
 	public void interact() {
-		ConsoleIO.getInstance().print(this.game.getAttemptsCount() + " attempt(s):");
+		ConsoleIO.getInstance().print(
+			Message.ATTEMPTS_COUNT.getFormattedMessage(new String[] {String.valueOf(this.game.getAttemptsCount())}
+		));
 		this.secretCombinationView.write();
 		this.printAttempts();
 		ProposedCombination proposedCombination = this.proposedCombinationView.read(Message.PROPOSE_COMBINATION.getMessage() + ": ");
@@ -27,13 +29,10 @@ public class AttemptView extends View {
 	
 	private void printAttempts() {
 		for (Attempt attempt : this.game.getAttempts()) {
-			ConsoleIO.getInstance().print(this.renderAttempt(attempt));
+			String combination = this.proposedCombinationView.renderCombinationInitials(attempt.getProposedCombination());
+			ConsoleIO.getInstance().print(Message.RESULT.getFormattedMessage(
+				new String[]{combination, String.valueOf(attempt.getBlacks()), String.valueOf(attempt.getWhites())}
+			));
 		}
-	}	
-	
-	public String renderAttempt(Attempt attempt) {
-		return this.proposedCombinationView.renderCombinationInitials(attempt.getProposedCombination()) + " --> " 
-				+ attempt.getBlacks() + " blacks and " 
-				+ attempt.getWhites() + " whites";
-	}
+	}		
 }

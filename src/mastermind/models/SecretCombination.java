@@ -6,10 +6,14 @@ import java.util.Random;
 public class SecretCombination extends Combination {
 	public SecretCombination(int combinationLength) {
 		super(combinationLength);
+		this.populateRandomly();
+	}	
+	
+	private void populateRandomly() {
 		for (int i = 0; i < this.getSize(); i++) {
 			this.setColor(i, this.getRandomColorAvoiding(this.getColors()));
 		}
-	}	
+	}
 	
 	private Color getRandomColorAvoiding(Color[] colors) {
 		Color color;

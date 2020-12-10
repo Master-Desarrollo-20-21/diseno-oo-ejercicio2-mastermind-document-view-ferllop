@@ -19,14 +19,10 @@ public class Player {
 	}	
 	
 	public Attempt getLastAttempt() {
-		return attempts.get(attempts.size()-1);
+		return this.getAttempt(attempts.size()-1);
 	}	
 
 	public ArrayList<Attempt> getAttempts() {
 		return attempts;
-	}
-
-	public int getAttemptsCount() {
-		return attempts.size();
 	}
 }
