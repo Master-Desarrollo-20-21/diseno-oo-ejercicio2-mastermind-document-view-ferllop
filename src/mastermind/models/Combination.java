@@ -27,7 +27,7 @@ public abstract class Combination {
 	}
 
 	protected void setColor(int position, Color color) {
-		this.combination[position] = color;
+		combination[position] = color;
 	}
 	
 }
