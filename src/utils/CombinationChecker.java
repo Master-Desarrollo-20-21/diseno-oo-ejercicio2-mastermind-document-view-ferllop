@@ -12,12 +12,10 @@ public class CombinationChecker<T> {
 	}
 	
 	public boolean hasValidLength(int validLength) {
-		assert(combination != null);
 		return combination.length == validLength;
 	}
 
 	public boolean hasValidValues(T[] validValues) {
-		assert(combination != null);
 		for (T value : combination) {
 			if (!Arrays.asList(validValues).contains(value)) {
 				return false;
@@ -27,7 +25,6 @@ public class CombinationChecker<T> {
 	}
 
 	public boolean hasDuplicates() {
-		assert(combination != null);
 		HashSet<T> list = new HashSet<T>(Arrays.asList(combination));
 		return list.size() < combination.length;
 	}
