@@ -37,7 +37,7 @@ public enum Color {
 	}
 
 	public static String getInitials() {
-		return this.getInitials(Color.values());
+		return Color.getInitials(Color.values());
 	}
 	
 	public static Color[] getColorsArray(String colorsInitials) {
