@@ -11,11 +11,11 @@ public class Player {
 	}
 	
 	public void saveAttempt(Attempt attempt) {
-		attempts.add(attempt);
+		this.attempts.add(attempt);
 	}
 	
 	public Attempt getAttempt(int index) {
-		return attempts.get(index);
+		return this.attempts.get(index);
 	}	
 	
 	public Attempt getLastAttempt() {
